@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+development:
+  <<: *default
+  database: party_development
+  username: usera
+  password: windowsvista
+
+test:
+  <<: *default
+  database: party_test
+  username: usera
+  password: windowsvista
+
+production:
+  <<: *default
+  database: party_production
+  username: party
+  password: <%= ENV['PARTY_DATABASE_PASSWORD'] %>
