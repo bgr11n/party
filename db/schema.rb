@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151231131617) do
+ActiveRecord::Schema.define(version: 20160102113816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "persistence_tracks", force: :cascade do |t|
+  create_table "tracks", force: :cascade do |t|
     t.string   "uri"
     t.string   "title"
     t.string   "thumbnail"
@@ -25,6 +25,20 @@ ActiveRecord::Schema.define(version: 20151231131617) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "persistence_tracks", ["uri"], name: "index_persistence_tracks_on_uri", using: :btree
+  add_index "tracks", ["uri"], name: "index_tracks_on_uri", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "nickname"
+    t.string   "email"
+    t.string   "source"
+    t.boolean  "grand",         default: false
+    t.string   "password_salt"
+    t.string   "password_hash"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["nickname"], name: "index_users_on_nickname", using: :btree
 
 end

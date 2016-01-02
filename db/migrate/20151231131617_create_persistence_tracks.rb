@@ -1,6 +1,6 @@
 class CreatePersistenceTracks < ActiveRecord::Migration
   def change
-    create_table :persistence_tracks do |t|
+    create_table :tracks do |t|
       t.string :uri
       t.string :title
       t.string :thumbnail
@@ -8,6 +8,6 @@ class CreatePersistenceTracks < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :persistence_tracks, :uri
+    add_index :tracks, :uri
   end
 end
