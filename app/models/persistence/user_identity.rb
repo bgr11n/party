@@ -3,10 +3,6 @@ module Persistence
     SOURCES = [:plain, :twitch]
 
     belongs_to :user
-
-    validates :email, :source, presence: true
-    validates :email, uniqueness: true
-    validates :source, inclusion: { in: SOURCES.map(&:to_s) }
   end
 end
 

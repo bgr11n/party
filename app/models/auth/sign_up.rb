@@ -3,12 +3,16 @@ module Auth
     attr_accessor :email, :password
 
     validates :email, :password, presence: true
-    validates :password, length: { in: 6..20 }
+    validate :password_validator
     validate :validate_email_exists
 
     before_save :encrypt_password
     before_save :save_identity
     before_save :save_user
+
+    def password_required?
+      true
+    end
 
   private
 
@@ -27,8 +31,12 @@ module Auth
       end
     end
 
+    def password_validator
+      PasswordValidator.new(attributes: :password).validate_each(self, :password, password)
+    end
+
     def validate_email_exists
-      if ::Persistence::UserIdentity.where(email: email).count > 0
+      if ::Persistence::UserIdentity.where(email: email, source: 'plain').count > 0
         errors.add(:email, 'has already been taken')
       end
     end
