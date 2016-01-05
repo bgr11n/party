@@ -3,6 +3,7 @@ module Auth
     attr_accessor :email, :password
 
     validates :email, :password, presence: true
+    validates :password, length: { in: 6..20 }
     validate :validate_email_exists
 
     before_save :encrypt_password
