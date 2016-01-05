@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
+ruby '2.2.1'
 
-gem 'annotate'
+gem 'annotate', '~> 2.7.0'
+gem 'active_type', '~> 0.4.3'
 gem 'bcrypt', '~> 3.1.7'
+gem 'bootstrap-sass'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
