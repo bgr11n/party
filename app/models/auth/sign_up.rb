@@ -3,6 +3,7 @@ module Auth
     attr_accessor :email, :password
 
     validates :email, :password, presence: true
+
     validate :password_validator
     validate :validate_email_exists
 

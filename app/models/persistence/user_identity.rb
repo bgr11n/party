@@ -3,6 +3,14 @@ module Persistence
     SOURCES = [:plain, :twitch]
 
     belongs_to :user
+
+    def has_password? password
+      password_hash == BCrypt::Engine.hash_secret(password, password_salt)
+    end
+
+    SOURCES.each do |_source|
+      define_method "from_#{_source}?", -> { _source.to_s == source.to_s }
+    end
   end
 end
 
