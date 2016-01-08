@@ -4,6 +4,8 @@ module Persistence
 
     belongs_to :user
 
+    validates :source, inclusion: { in: SOURCES.map(&:to_s) }
+
     def has_password? password
       password_hash == BCrypt::Engine.hash_secret(password, password_salt)
     end

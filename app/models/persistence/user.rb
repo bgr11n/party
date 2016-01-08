@@ -2,7 +2,6 @@ module Persistence
   class User < ActiveRecord::Base
     validates :nickname, uniqueness: true
     validates :nickname, presence: true
-    validates :nickname, length: { maximum: 40 }
 
     has_many :user_identities, dependent: :destroy
 
