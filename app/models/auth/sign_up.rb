@@ -2,10 +2,9 @@ module Auth
   class SignUp < ActiveType::Object
     attr_accessor :email, :password
 
-    validates :email, :password, presence: true
-
+    validate :email_validator
+    validate :auth_email_validator
     validate :password_validator
-    validate :email_existence_validator
 
     before_save :encrypt_password
     before_save :save_identity
@@ -16,6 +15,10 @@ module Auth
     end
 
     def email_required?
+      true
+    end
+
+    def new_user?
       true
     end
 
@@ -40,8 +43,12 @@ module Auth
       PasswordValidator.new(attributes: :password).validate_each(self, :password, password)
     end
 
-    def email_existence_validator
-      EmailExistenceValidator.new(attributes: :email).validate_each(self, :email, email)
+    def email_validator
+      EmailValidator.new(attributes: :email).validate_each(self, :email, email)
+    end
+
+    def auth_email_validator
+      AuthEmailValidator.new(attributes: :email).validate_each(self, :email, email)
     end
 
     def save_user
