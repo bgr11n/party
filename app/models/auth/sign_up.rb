@@ -29,7 +29,14 @@ module Auth
     end
 
     def identity
+      p '================================ 1'
+      p ::Persistence::UserIdentity.where(email: email)
+      p '================================ 1'
       @identity ||= ::Persistence::UserIdentity.new user: user, email: email, source: 'plain'
+      p '================================ 2'
+      p ::Persistence::UserIdentity.where(email: email)
+      p '================================ 2'
+      @identity
     end
 
     def encrypt_password

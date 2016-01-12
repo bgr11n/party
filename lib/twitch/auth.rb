@@ -13,8 +13,7 @@ module Twitch
       self.class.post '/oauth2/token', body: body
     end
 
-
-    private
+  private
 
     def body
       {

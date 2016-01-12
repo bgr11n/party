@@ -10,4 +10,8 @@ html lang="en"
     = csrf_meta_tags
 
   body
-    == yield
+    .container
+      - if flash
+          p= flash.to_json
+
+      == yield
