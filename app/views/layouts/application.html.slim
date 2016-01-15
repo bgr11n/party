@@ -11,7 +11,7 @@ html lang="en"
 
   body
     .container
-      - if flash
-          p= flash.to_json
+      - if flash.present?
+          p= flash.to_h.inspect
 
       == yield
